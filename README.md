@@ -11,6 +11,9 @@ jQuery plugin to fix elements vertically as the page scrolls down. Configurable,
   $('#menu').fixie({ topMargin: '20px' });
 ```
 
+## Demo
+http://ndpsoftware.com/fixie/demo.html
+
 ### Options
 Accepts an options object, which may contain (with `defaults`):
 * strategy: `fixed`  Choose an implementation. See below.
