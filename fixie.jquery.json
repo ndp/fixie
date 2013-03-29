@@ -1,0 +1,35 @@
+{
+    "name": "fixie",
+    "title": "jQuery Fixie",
+    "description": "jQuery plugin for fixing an element at the top of the page after user scroll.",
+    "keywords": [
+        "scroll",
+        "fixed",
+        "layout",
+        "animation"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "Andrew J. Peterson",
+        "url": "http://ndpsoftware.com"
+    },
+    "maintainers": [
+        {
+          "name": "Andrew J. Peterson",
+          "email": "andy@ndpsoftware.com",
+          "url": "http://ndpsoftware.com"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/ndp/fixie/blob/master/LICENSE.txt"
+        }
+    ],
+    "bugs": "https://github.com/ndp/fixie/issues",
+    "homepage": "https://github.com/ndp/fixie",
+    "docs": "https://github.com/ndp/fixie",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
