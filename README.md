@@ -5,14 +5,14 @@ jQuery plugin to fix elements vertically as the page scrolls down. Configurable,
 "Pin" the given element to the top of the page on vertical scroll. Also know as
 "conditional fixed placement".
 
+### Demo
+http://ndpsoftware.com/fixie/demo.html
+
 ## Usage
 ```
   $('#menu').fixie();   // defaults
-  $('#menu').fixie({ topMargin: '20px' });
+  $('header').fixie({ topMargin: '20px' });
 ```
-
-## Demo
-http://ndpsoftware.com/fixie/demo.html
 
 ### Options
 Accepts an options object, which may contain (with `defaults`):
