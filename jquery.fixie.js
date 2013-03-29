@@ -58,15 +58,24 @@
     return $(this).each(function () {
 
       var $target = $(this);
-      var margin = $target.position().top - (config.topMargin || 0);
+      var originalY = $target.position().top;
+
+
+      var applyPinnedClass = function (pinnedNow) {
+        $target.toggleClass(config.pinnedClass, pinnedNow);
+        if (config.pinnedBodyClass) {
+          $('body').toggleClass(config.pinnedBodyClass, pinnedNow);
+        }
+      }
 
       var strategies = {
 
         relative: function () {
           $target.css('position', 'relative');
           var moveIt = function () {
-            var top = Math.max(0, window.scrollY - margin);
-            $target.css('top', top).toggleClass(config.pinnedClass, top > 0);
+            var top = Math.max(0, window.scrollY - originalY + config.topMargin);
+            $target.css('top', top);
+            applyPinnedClass(top > config.pinSlop);
           };
           $(window).on('scroll', throttle(moveIt, config.throttle));
         },
@@ -77,8 +86,9 @@
             $target.stop(true, false).animate({'opacity': 0.01}, 0.05);
           };
           var moveIt = function () {
-            var top = Math.max(0, window.scrollY - margin);
-            $target.css('top', top).toggleClass(config.pinnedClass, top > 0);
+            var top = Math.max(0, window.scrollY - originalY + config.topMargin);
+            $target.css('top', top);
+            applyPinnedClass(top > 0);
             $target.stop(true, false).animate({'opacity': 1.0}, 'fast', false, false);
           };
           $(window).on('scroll', beforeAndAfter(hideIt, moveIt, config.throttle));
@@ -86,12 +96,13 @@
 
         fixed: function () {
           var fixIt = function () {
-            if (window.scrollY > (margin + config.extraScrollPadding)) {
-              $target.css({position: 'fixed', top: config.topMargin}).
-                  addClass(config.pinnedClass);
-            } else
-              $target.css({position: 'relative', top: 0}).
-                  removeClass(config.pinnedClass);
+            if ((window.scrollY - config.pinSlop) > (originalY - config.topMargin)) {
+              $target.css({position: 'fixed', top: config.topMargin});
+              applyPinnedClass(true);
+            } else {
+              $target.css({position: 'relative', top: 0});
+              applyPinnedClass(false);
+            }
           };
           $(window).on('scroll', throttle(fixIt, config.throttle));
         }
@@ -103,9 +114,10 @@
 
   $.fn.fixie.defaults = {
     strategy: 'fixed',
-    extraScrollPadding: 0, // make the user scroll extra down the page before the element is fixed?
+    pinSlop: 0,    // make the user scroll extra down the page before the element is fixed?
     topMargin: 0, // how close to the top to pin it?
     pinnedClass: '_pinnedToTop', // any css class to add on when pinned
+    pinnedBodyClass: undefined,
     throttle: 30                  // how often to adjust position of element
   };
 
