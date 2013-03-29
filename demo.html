@@ -1,0 +1,100 @@
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="jquery.fixie.js"></script>
+  <script type="text/javascript">
+    // Grab the strategy from the URL
+    var strategy = undefined;
+    var match = document.location.search.match(/strategy=(.\S+)/);
+    if (match) strategy = match[1];
+
+    $(function() {
+      $('header').fixie({strategy: strategy});
+      $('menu').fixie({topMargin:80, pinSlop: -80, strategy: strategy});
+    });
+  </script>
+
+  <style>
+    html, body {
+      margin:  0;
+      font-family: mono-spaced, monospace;
+    }
+    a {
+      color: blueviolet;
+    }
+    header {
+      height:  80px;
+      background-color: yellow;
+      width: 100%; /* when it becomes pinned with position: fixed, it needs a wider width */
+    }
+    header._pinnedToTop {
+      height:  30px;
+      z-index:100;
+      border-bottom: 1px solid black;
+    }
+    header nav {
+      display: inline-block;
+      padding: 25px 20px;
+      font-size:  large;
+    }
+    header._pinnedToTop nav {
+      padding: 5px 20px 0px 20px;
+      font-size:  medium;
+    }
+    h1 {
+      margin: 0;
+      display: inline-block;
+      padding: 20px;
+    }
+    header._pinnedToTop  h1 {
+      font-size:  medium;
+      padding: 5px 0 0 20px;
+    }
+    p {
+      margin-left: 20px;
+      width: 67%;
+    }
+    p:before {
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam blandit leo quis eros aliquet blandit. Cras facilisis neque vel enim fermentum quis vulputate leo placerat. Nam molestie, lacus at faucibus blandit, diam quam placerat massa, nec tincidunt ligula dolor eu libero. Fusce neque erat, adipiscing eget consequat vel, sollicitudin id purus. Ut convallis auctor ipsum, vitae semper turpis posuere ac. In pellentesque, metus id rhoncus tincidunt, erat urna viverra metus, vitae egestas purus sapien at risus. In malesuada iaculis consectetur. In cursus vehicula lorem et feugiat.";
+    }
+    menu {
+      margin-left: 70%;
+      width:  30%;
+      height:  0;
+    }
+    menu nav {
+      padding:  10px;
+      width:  100%;
+      background-color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>jQuery fixie Demo</h1>
+    <nav>
+      <a href="http://github.com/ndp/fixie">Github Repo</a>
+      <a href="http://ndpsoftware.com">More from NDP Software</a>
+    </nav>
+  </header>
+<p></p>
+<p></p>
+<p></p>
+  <menu>
+    <nav>Apply Different Strategies</nav>
+    <nav><a href="?strategy=relative">relative</a></nav>
+    <nav><a href="?strategy=relativeWithHiding">relativeWithHiding</a></nav>
+    <nav><a href="?strategy=fixed">fixed</a></nav>
+  </menu>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+</body>
+</html>
