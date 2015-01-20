@@ -1,0 +1,27 @@
+{
+  "name": "fixie",
+  "version": "1.0.1",
+  "main": "jquery.fixie.js",
+  "homepage": "https://github.com/ndp/fixie",
+  "authors": [
+    "Andrew J. Peterson <andy@ndpsoftware.com>"
+  ],
+  "description": "jQuery plugin to fix elements vertically as the page scrolls down. Configurable, reusable.",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "conditional fixed placement",
+    "pin",
+    "vertical scroll",
+    "parallax",
+    "jquery-plugin"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.2.6"
+  },
+  "license": "MIT",
+  "ignore": [
+    "fixie.jquery.json"
+  ]
+
+}

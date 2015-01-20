@@ -47,6 +47,10 @@ Copyright (c) 2013 NDP Software. Andrew J. Peterson
 MIT License; see LICENSE.txt
 
 
+## History
+* 1.0.1: add bower file
+* 1.0.0: first release
+
 ## References
 * http://github.com/ndp/jsutils for tests
 * http://www.gregjopa.com/2011/07/conditional-fixed-positioning-with-jquery/
