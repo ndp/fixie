@@ -48,6 +48,7 @@ MIT License; see LICENSE.txt
 
 
 ## History
+* Bug fix: `relativeWithHiding` strategy resets opacity to `inherit` after element is made visible, so that fixed items can have any opacity applied with CSS.
 * 1.0.1: add bower file
 * 1.0.0: first release
 

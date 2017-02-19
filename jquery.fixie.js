@@ -1,4 +1,4 @@
-// jquery.fixie.js: Copyright(c) 2013 NDP Software, Andrew J. Peterson
+// jquery.fixie.js: Copyright(c) 2013, 2017 NDP Software, Andrew J. Peterson
 (function ($) {
 
   // Simple throttle function decorator.
@@ -89,7 +89,9 @@
             var top = Math.max(0, window.scrollY - originalY + config.topMargin);
             $target.css('top', top);
             applyPinnedClass(top > 0);
-            $target.stop(true, false).animate({'opacity': 1.0}, 'fast', false, false);
+            $target.stop(true, false).animate({'opacity': 1.0}, 'fast', function() {
+              $(this).css('opacity', 'inherit')
+            });
           };
           $(window).on('scroll', beforeAndAfter(hideIt, moveIt, config.throttle));
         },
@@ -123,4 +125,3 @@
 
 
 })(jQuery);
-
