@@ -10,6 +10,7 @@ export default [{
     file: pkg.browser,
     format: 'iife',
     sourcemap: false,
+    exports: 'named'
   },
   plugins: [
     resolve(),

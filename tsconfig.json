@@ -1,10 +1,12 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
     "sourceMap": true,
-    "declaration": true
+    "declaration": true,
+    "lib": ["es2016", "dom", "es5"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
+
+

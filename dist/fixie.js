@@ -1,23 +1,38 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+exports.__esModule = true;
 exports.fixie = void 0;
 /**
  * Quick rewrite of my JQuery plugin, fixie.
 
  */
-const throttle = function (fn, milliseconds) {
-    let timeout = null, lastCallAt = (new Date()).valueOf() - milliseconds;
-    return (...args) => {
-        const now = (new Date()).valueOf();
+var throttle = function (fn, milliseconds) {
+    var timeout = null, lastCallAt = (new Date()).valueOf() - milliseconds;
+    return function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var now = (new Date()).valueOf();
         if ((now - lastCallAt) >= milliseconds) {
-            fn(...args);
+            fn.apply(void 0, args);
             lastCallAt = now;
         }
         if (timeout) {
             clearTimeout(timeout);
         }
         timeout = setTimeout(function () {
-            fn(...args);
+            fn.apply(void 0, args);
             lastCallAt = (new Date()).valueOf();
         }, milliseconds);
     };
@@ -27,17 +42,21 @@ const throttle = function (fn, milliseconds) {
  a break of _milliseconds_, will call afterFn. Repeats
  as needed.
  */
-const beforeAndAfter = function (beforeFn, afterFn, milliseconds) {
-    let timeout = null;
-    return (...args) => {
+var beforeAndAfter = function (beforeFn, afterFn, milliseconds) {
+    var timeout = null;
+    return function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
         if (!timeout) {
-            beforeFn(...args);
+            beforeFn.apply(void 0, args);
         }
         if (timeout) {
             clearTimeout(timeout);
         }
         timeout = setTimeout(function () {
-            afterFn(...args);
+            afterFn.apply(void 0, args);
             timeout = null;
         }, milliseconds);
     };
@@ -45,18 +64,18 @@ const beforeAndAfter = function (beforeFn, afterFn, milliseconds) {
 function toggleClass(target, className, applyNow) {
     target.classList[applyNow ? 'add' : 'remove'](className);
 }
-const applyPinnedClass = function (target, pinnedNow, config) {
+var applyPinnedClass = function (target, pinnedNow, config) {
     toggleClass(target, config.pinnedClass, pinnedNow);
     if (config.pinnedBodyClass)
         toggleClass(document.body, config.pinnedBodyClass, pinnedNow);
 };
-const strategies = {
+var strategies = {
     relative: function (target, config) {
         // $target.css('position', 'relative')
         target.style.position = 'relative';
-        const moveIt = function () {
-            const top = Math.max(0, window.scrollY - config.originalY + config.topMargin);
-            target.style.top = `${top}px`;
+        var moveIt = function () {
+            var top = Math.max(0, window.scrollY - config.originalY + config.topMargin);
+            target.style.top = top + "px";
             // $target.css('top', top)
             applyPinnedClass(target, top > config.pinSlop, config);
         };
@@ -64,8 +83,8 @@ const strategies = {
     },
     relativeWithHiding: function (target, config) {
         target.style.position = 'relative';
-        const startMoving = function () {
-            const top = Math.max(0, window.scrollY - config.originalY + config.topMargin);
+        var startMoving = function () {
+            var top = Math.max(0, window.scrollY - config.originalY + config.topMargin);
             if (top < config.pinSlop)
                 return;
             if (config.movingClass)
@@ -74,11 +93,11 @@ const strategies = {
                 target.style.opacity = '0.01';
             applyPinnedClass(target, false, config);
         };
-        const repositionIt = function () {
-            let top = Math.max(0, window.scrollY - config.originalY + config.topMargin);
+        var repositionIt = function () {
+            var top = Math.max(0, window.scrollY - config.originalY + config.topMargin);
             if (top <= config.pinSlop)
                 top = 0;
-            target.style.top = `${top}px`;
+            target.style.top = top + "px";
             applyPinnedClass(target, top > 0, config);
             if (config.movingClass)
                 target.classList.remove(config.movingClass);
@@ -88,10 +107,10 @@ const strategies = {
         window.addEventListener('scroll', beforeAndAfter(startMoving, repositionIt, config.throttle));
     },
     fixed: function (target, config) {
-        const fixIt = function () {
+        var fixIt = function () {
             if ((window.scrollY - config.pinSlop) > (config.originalY - config.topMargin)) {
                 target.style.position = 'fixed';
-                target.style.top = `${config.topMargin}px`;
+                target.style.top = config.topMargin + "px";
                 applyPinnedClass(target, true, config);
             }
             else {
@@ -104,7 +123,7 @@ const strategies = {
     }
 };
 /* Finally, what we've been looking for */
-const defaults = {
+var defaults = {
     strategy: 'fixed',
     pinSlop: 0,
     topMargin: 0,
@@ -113,8 +132,8 @@ const defaults = {
     pinnedBodyClass: undefined,
     throttle: 30 // how often to adjust position of element
 };
-const fixie = function (el, options) {
-    const config = Object.assign(Object.assign(Object.assign({}, defaults), options), { originalY: el.offsetTop });
+var fixie = function (el, options) {
+    var config = __assign(__assign(__assign({}, defaults), options), { originalY: el.offsetTop });
     strategies[config.strategy](el, config);
 };
 exports.fixie = fixie;
