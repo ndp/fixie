@@ -1,0 +1,40 @@
+{
+  "name": "fixie",
+  "version": "2.0.0",
+  "main": "dist/fixie.js",
+  "types": "dist/fixie.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "yarn build",
+    "rollup": "rollup -c >dist/fixie.min.js",
+    "type:check": "tsc --noEmit"
+  },
+  "description": "Utility to fix elements vertically as the page scrolls. Configurable, reusable.",
+  "repository": "git@github.com:ndp/fixie.git",
+  "author": "Andrew Peterson <andy@ndpsoftware.com>",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "jquery",
+    "plugin",
+    "conditional fixed placement",
+    "pin",
+    "vertical scroll",
+    "parallax",
+    "jquery-plugin"
+  ],
+  "bugs": "https://github.com/ndp/fixie/issues",
+  "homepage": "https://github.com/ndp/fixie",
+  "docs": "https://github.com/ndp/fixie",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "rollup": "^2.55.0",
+    "rollup-plugin-babel-minify": "^10.0.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "typescript": "^4.3.5"
+  }
+}
