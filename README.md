@@ -33,12 +33,13 @@ http://ndpsoftware.com/fixie/demo.html
 
 ### Webpack or similar
 
-``
-
 ```
-> yarn add fixie
+> yarn add fixiejs
+```
 
-> cat my-file.js
+```js
+  // my-file.js
+  import { fixie } from 'fixiejs'
   const el = document.getElementById(...) or $('#menu')[0]
   fixie(el);   // use defaults
   fixie(el, { topMargin: '20px' }); // see Options below
@@ -75,6 +76,13 @@ There are various strategies available:
   becomes "fixed", that it maintains its natural width. This is better done
   with your CSS than fixie itself, so that the pinned element can respond
   well to browser resizing. Often this is only a "width: 100%" statement.
+
+
+### Development
+
+Uses minimal tooling. See `package.json` for relevant stuff. 
+
+**Rollup** is used to build minified web-ready file, but otherwise not needed.
 
 
 ## License
