@@ -1,18 +1,53 @@
 fixie
 =====
 
-jQuery plugin to fix elements vertically as the page scrolls down. Configurable, reusable.
+Fix elements vertically as the page scrolls down. Configurable, reusable.
 "Pin" the given element to the top of the page on vertical scroll. Also know as
 "conditional fixed placement".
 
+No dependencies. Useful if you're not using React or something like that.
+
+The main feature is that this supports different strategies. All the code
+I saw took a single approach, and it may not work for your markup or page length. 
+This tool allows you to try different techniques, or event switch in 
+different situations.
+
+If you're looking for the jQuery plugin, use an earlier, < 2.0 version.
+The current one does not require jQuery. (There's no reason it won't work 
+at the same time, though.) 
+
+If you want jQuery (or some other feature), let me 
+know. I think I'm the only one using this, so I am not implementing backward
+compatibility unless asked.
+
 ### Demo
+```shell
+> git clone ...
+> yarn install
+> open demo.html
+```
+
 http://ndpsoftware.com/fixie/demo.html
 
 ## Usage
+
+### Webpack or similar
+
+``
+
 ```
-  $('#menu').fixie();   // defaults
-  $('header').fixie({ topMargin: '20px' });
+> yarn add fixie
+
+> cat my-file.js
+  const el = document.getElementById(...) or $('#menu')[0]
+  fixie(el);   // use defaults
+  fixie(el, { topMargin: '20px' }); // see Options below
 ```
+
+### Direct inclusion on web pages
+
+This is not recommended, but if you want, `dist/fixie.min.js` can be
+directly included on a web page. Just grab it, similar to how the demo page does.
 
 ### Options
 Accepts an options object, which may contain (with `defaults`):
@@ -43,11 +78,12 @@ There are various strategies available:
 
 
 ## License
-Copyright (c) 2013 NDP Software. Andrew J. Peterson
+Copyright (c) 2013-2021 NDP Software. Andrew J. Peterson
 MIT License; see LICENSE.txt
 
 
 ## History
+* 2021-07-29 Convert to Typescript
 * Bug fix: `relativeWithHiding` strategy resets opacity to `inherit` after element is made visible, so that fixed items can have any opacity applied with CSS.
 * 1.0.1: add bower file
 * 1.0.0: first release

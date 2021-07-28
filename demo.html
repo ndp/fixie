@@ -1,16 +1,27 @@
 <html>
 <head>
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script type="text/javascript" src="jquery.fixie.js"></script>
+  <script type="text/javascript" src="dist/fixie.min.js"></script>
   <script type="text/javascript">
+
+    const ready = (callback) => {
+      if (document.readyState != 'loading') callback()
+      else document.addEventListener('DOMContentLoaded', callback)
+    }
+
+
     // Grab the strategy from the URL
     var strategy = undefined;
     var match = document.location.search.match(/strategy=(.\S+)/);
     if (match) strategy = match[1];
 
-    $(function() {
-      $('header').fixie({strategy: strategy});
-      $('menu').fixie({
+    ready(function() {
+      const header = document.getElementsByTagName('header')[0]
+      console.log(header)
+      fixie.fixie(header, {strategy: strategy});
+
+      const menu = document.getElementsByTagName('menu')[0]
+      console.log(menu)
+      fixie.fixie(menu, {
         topMargin: 80,
         pinSlop: -80,
         strategy: strategy,
